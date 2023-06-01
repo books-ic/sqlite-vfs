@@ -15,7 +15,7 @@ use std::slice;
 use std::sync::{Arc, Mutex};
 use std::time::Duration;
 
-mod ffi;
+use libsqlite3_sys as ffi;
 
 /// A file opened by [Vfs].
 pub trait DatabaseHandle: Sync {
