@@ -797,8 +797,17 @@ mod vfs {
     ) -> i32 {
         log::trace!("current_time_int64");
 
-        const UNIX_EPOCH: i64 = 24405875 * 8640000;
-        let now = time::OffsetDateTime::now_utc().unix_timestamp() + UNIX_EPOCH;
+        #[cfg(not(any(target_arch = "wasm32")))]
+        let now = {
+            const UNIX_EPOCH: i64 = 24405875 * 8640000;
+            let now = time::OffsetDateTime::now_utc().unix_timestamp() + UNIX_EPOCH;
+            now
+        };
+        #[cfg(any(target_arch = "wasm32"))]
+        let now = {
+            let time = ic_cdk::api::time();
+            time.try_into().unwrap()
+        };
         #[cfg(feature = "sqlite_test")]
         let now = if ffi::sqlite3_get_current_time() > 0 {
             ffi::sqlite3_get_current_time() as i64 * 1000 + UNIX_EPOCH
