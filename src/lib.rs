@@ -344,8 +344,6 @@ struct FileExt<V, F: DatabaseHandle> {
 // Example mem-fs implementation:
 // https://github.com/sqlite/sqlite/blob/a959bf53110bfada67a3a52187acd57aa2f34e19/ext/misc/memvfs.c
 mod vfs {
-    use std::time::UNIX_EPOCH;
-
     use super::*;
 
     /// Open a new file handler.
