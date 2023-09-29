@@ -15,7 +15,7 @@ members = ["test-vfs"]
 [dependencies]
 log = "0.4"
 time = { path = "../time/time", features = ["icp"] }
-libsqlite3-sys = { path = "../../../libs/rusqlite/libsqlite3-sys", package = "libsqlite3-sys-ic", features = [
+libsqlite3-sys = { path = "../rusqlite/libsqlite3-sys", package = "libsqlite3-sys-ic", features = [
     "bundled",
 ] }
 ic-cdk = "*"
